@@ -13,7 +13,7 @@ pipeline {
                     // Build the Docker image
                     sh '''
                     echo "Building Docker Images with Docker Compose"
-                    docker-compose build
+                    docker run --rm -v $PWD:/app -v /var/run/docker.sock:/var/run/docker.sock docker/compose:latest build
                     '''
                 }
             }
