@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "wajdi.bejaouui/django-app"
+        DOCKER_IMAGE = "wajdibejaoui/django-app"
         DOCKER_TAG = "latest" // Or dynamically set with BUILD_NUMBER or GIT_COMMIT
     }
 
