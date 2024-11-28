@@ -23,8 +23,8 @@ pipeline {
                     sh '''
                     echo "Building Docker Images with Docker Compose"
                     ls -l /usr/local/bin/docker-compose
-                    chmod +x /usr/local/bin/docker-compose
                     docker-compose --version
+                    
                     
                     docker-compose build
                     '''
