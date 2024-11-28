@@ -24,11 +24,7 @@ pipeline {
                     echo "Building Docker Images with Docker Compose"
                     ls -alh  # List directory contents for 
                     
-                    echo "Checking directory contents"
-                    docker run --rm -v $PWD:/app -v /var/run/docker.sock:/var/run/docker.sock docker/compose:latest ls /app
-
-                    docker run --rm -v $PWD:/app -v /var/run/docker.sock:/var/run/docker.sock docker/compose:latest -f /app/docker-compose.yml build
-                    ls -alh  # List directory contents for debugging
+                    docker-compose build
                     '''
                 }
             }
