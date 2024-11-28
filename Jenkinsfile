@@ -7,13 +7,24 @@ pipeline {
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Checkout the code to make sure the docker-compose.yml file is available
+                    checkout scm
+                }
+            }
+        }
+        
         stage('Build') {
             steps {
                 script {
                     // Build the Docker image
                     sh '''
                     echo "Building Docker Images with Docker Compose"
+                    ls -alh  # List directory contents for debugging
                     docker run --rm -v $PWD:/app -v /var/run/docker.sock:/var/run/docker.sock docker/compose:latest build
+                    ls -alh  # List directory contents for debugging
                     '''
                 }
             }
