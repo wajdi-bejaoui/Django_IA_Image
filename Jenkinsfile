@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "wajdibejaoui/django-app"
-        DOCKER_TAG = "latest" // Or dynamically set with BUILD_NUMBER or GIT_COMMIT
+        // DOCKER_TAG = "latest" // Or dynamically set with BUILD_NUMBER or GIT_COMMIT
         DOCKER_TAG = "${env.BUILD_NUMBER ?: 'latest'}" // Use BUILD_NUMBER if available, fallback to 'latest'
 
     }
