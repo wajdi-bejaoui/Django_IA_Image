@@ -55,30 +55,15 @@ pipeline {
         }
 
 
-        stage('Setup Minikube') {
-            steps {
-                script {
-                    sh '''
-                    echo "Starting Minikube"
-                    minikube start --driver=docker
-
-                    echo "Configuring Minikube Docker environment"
-                    eval $(minikube docker-env)
-
-                    echo "Minikube setup complete"
-                    '''
-                }
-            }
-        }
 
         stage('Deploy to Kubernetes') {
             steps {
                 script {
                     sh '''
-                    echo "Setting up Minikube context for kubectl"
-                    minikube start
+                     echo "Setting up Minikube context for kubectl"
+                     minikube start
 
-                    // Set Minikube's Docker environment to use local images
+                    echo "Set Minikube's Docker environment to use local images"
                     sh 'eval $(minikube docker-env)'
                     
                     echo "Applying Kubernetes manifests"
@@ -98,3 +83,19 @@ pipeline {
         }
     }
 }
+
+        // stage('Setup Minikube') {
+        //     steps {
+        //         script {
+        //             sh '''
+        //             echo "Starting Minikube"
+        //             minikube start --driver=docker
+
+        //             echo "Configuring Minikube Docker environment"
+        //             eval $(minikube docker-env)
+
+        //             echo "Minikube setup complete"
+        //             '''
+        //         }
+        //     }
+        // }
