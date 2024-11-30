@@ -63,8 +63,6 @@ pipeline {
                      echo "Setting up Minikube context for kubectl"
                      minikube start
 
-                    echo "Set Minikube's Docker environment to use local images"
-                    sh 'eval $(minikube docker-env)'
                     
                     echo "Applying Kubernetes manifests"
                     sed -i "s|DOCKER_IMAGE|${DOCKER_IMAGE}:${DOCKER_TAG}|g" k8s/django_deploy.yml
@@ -83,6 +81,8 @@ pipeline {
         }
     }
 }
+                    // echo "Set Minikube's Docker environment to use local images"
+                    // sh 'eval $(minikube docker-env)'
 
         // stage('Setup Minikube') {
         //     steps {
