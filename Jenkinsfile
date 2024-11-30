@@ -6,6 +6,12 @@ pipeline {
         // DOCKER_TAG = "latest" // Or dynamically set with BUILD_NUMBER or GIT_COMMIT
         DOCKER_TAG = "${env.BUILD_NUMBER ?: 'latest'}" // Use BUILD_NUMBER if available, fallback to 'latest'
 
+        MYSQL_DATABASE = 'django_db'
+        MYSQL_USER = 'test'
+        MYSQL_PASSWORD = 'test'
+        MYSQL_ROOT_PASSWORD = 'test'
+        DJANGO_SECRET_KEY = 'your-secret-key'
+
     }
 
     stages {
@@ -56,9 +62,12 @@ pipeline {
                     minikube start
                     
                     echo "Applying Kubernetes manifests"
-                    sed -i "s|DOCKER_IMAGE|${DOCKER_IMAGE}:${DOCKER_TAG}|g" k8s/deployment.yml
-                    kubectl apply -f k8s/deployment.yml
-                    kubectl apply -f k8s/service.yml
+                    sed -i "s|DOCKER_IMAGE|${DOCKER_IMAGE}:${DOCKER_TAG}|g" k8s/django_deploy.yml
+
+                    kubectl apply -f k8s/configmap.yml
+                    kubectl apply -f k8s/secret.yml
+                    kubectl apply -f k8s/mysql_deploy.yml
+                    kubectl apply -f k8s/django_deploy.yml
 
                     echo "Checking deployed resources"
                     kubectl get pods
