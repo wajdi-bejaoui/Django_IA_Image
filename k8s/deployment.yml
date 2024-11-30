@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app
+spec:
+  # replicas: 3 # Number of pod replicas
+  selector:
+    matchLabels:
+      app: django-app
+  template:
+    metadata:
+      labels:
+        app: django-app
+    spec:
+      containers:
+      - name: django-app
+        image: wajdibejaoui/django-app:latest # Replace 'latest' with the tag you use
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "128Mi" # Reduced from 256Mi
+            cpu: "200m"     # Reduced from 250m
+        ports:
+        - containerPort: 8000
