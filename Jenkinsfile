@@ -54,26 +54,6 @@ pipeline {
             }
         }
 
-        stage('Install Minikube') {
-            steps {
-                script {
-                    sh '''
-                    echo "Installing Minikube"
-                    
-                    # Install dependencies
-                    apt-get update -y
-                    apt-get install -y curl apt-transport-https virtualbox virtualbox-ext-pack
-                    
-                    # Download Minikube
-                    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-                    install minikube-linux-amd64 /usr/local/bin/minikube
-
-                    # Verify installation
-                    minikube version
-                    '''
-                }
-            }
-        }
 
         stage('Setup Minikube') {
             steps {
