@@ -106,7 +106,8 @@ DATABASES = {
         'USER': 'root',  # Your MySQL username
         'PASSWORD': '',  # Your MySQL password
         # 'HOST': '127.0.0.1',  # Or the IP address of your MySQL server
-        'HOST': 'mysql_db',  # Or the IP address of your MySQL server
+        'HOST': 'localhost',  # Or the IP address of your MySQL server
+        # 'HOST': 'mysql_db',  # Or the IP address of your MySQL server        
         # the MySQL host should point to the container name, not 127.0.0.1. Since you're using Docker Compose,
         #   you should set the HOST to the service name defined in the docker-compose.yml file (mysql_db in this case).
         'PORT': '3306',  # The default MySQL port

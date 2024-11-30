@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: django-app
-        image: wajdibejaoui/django-app:latest # Replace 'latest' with the tag you use
+        image: DOCKER_IMAGE:DOCKER_TAG # Placeholder for dynamic replacement
         resources:
           limits:
             memory: "512Mi"
