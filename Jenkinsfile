@@ -54,12 +54,52 @@ pipeline {
             }
         }
 
+        stage('Install Minikube') {
+            steps {
+                script {
+                    sh '''
+                    echo "Installing Minikube"
+                    
+                    # Install dependencies
+                    sudo apt-get update -y
+                    sudo apt-get install -y curl apt-transport-https virtualbox virtualbox-ext-pack
+                    
+                    # Download Minikube
+                    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+                    sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+                    # Verify installation
+                    minikube version
+                    '''
+                }
+            }
+        }
+
+        stage('Setup Minikube') {
+            steps {
+                script {
+                    sh '''
+                    echo "Starting Minikube"
+                    minikube start --driver=docker
+
+                    echo "Configuring Minikube Docker environment"
+                    eval $(minikube docker-env)
+
+                    echo "Minikube setup complete"
+                    '''
+                }
+            }
+        }
+
         stage('Deploy to Kubernetes') {
             steps {
                 script {
                     sh '''
                     echo "Setting up Minikube context for kubectl"
                     minikube start
+
+                    // Set Minikube's Docker environment to use local images
+                    sh 'eval $(minikube docker-env)'
                     
                     echo "Applying Kubernetes manifests"
                     sed -i "s|DOCKER_IMAGE|${DOCKER_IMAGE}:${DOCKER_TAG}|g" k8s/django_deploy.yml
