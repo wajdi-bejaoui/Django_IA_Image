@@ -12,6 +12,8 @@ pipeline {
         MYSQL_ROOT_PASSWORD = 'test'
         DJANGO_SECRET_KEY = 'your-secret-key'
 
+         KUBECONFIG = credentials('kubeconfig-credential-id')
+
     }
 
     stages {
@@ -60,8 +62,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                     echo "Setting up Minikube context for kubectl"
-                     minikube start
+                     
 
                     
                     echo "Applying Kubernetes manifests"
@@ -76,18 +77,22 @@ pipeline {
                     kubectl apply -f k8s/django_deploy.yml
 
 
-                    echo "Checking deployed resources"
-                    kubectl get pods
-                    kubectl get svc
-                    minikube service django-service --url 
+                    
 
-                    kubectl logs django-app-5fbcbf58c-f5bvc
                     '''
                 }
             }
         }
     }
 }
+
+// echo "Checking deployed resources"
+//                     kubectl get pods
+//                     kubectl get svc
+//                     minikube service django-service --url 
+
+// echo "Setting up Minikube context for kubectl"
+//                      minikube start
                     // echo "Set Minikube's Docker environment to use local images"
                     // sh 'eval $(minikube docker-env)'
 
