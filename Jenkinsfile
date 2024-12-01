@@ -75,6 +75,8 @@ pipeline {
                     echo "Checking deployed resources"
                     kubectl get pods
                     kubectl get svc
+                    minikiube service django-service --url 
+
                     '''
                 }
             }
