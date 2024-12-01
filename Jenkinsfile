@@ -68,10 +68,14 @@ pipeline {
                     sed -i "s|DOCKER_IMAGE|${DOCKER_IMAGE}|g" k8s/django_deploy.yml
                     sed -i "s|DOCKER_TAG|${DOCKER_TAG}|g" k8s/django_deploy.yml
 
+                    echo "${DOCKER_IMAGE}:${DOCKER_TAG}"
+
                     kubectl apply -f k8s/configmap.yml
                     kubectl apply -f k8s/secret.yml
                     kubectl apply -f k8s/mysql_deploy.yml
                     kubectl apply -f k8s/django_deploy.yml
+
+                    kubectl logs django-app-5fbcbf58c-f5bvc
 
                     echo "Checking deployed resources"
                     kubectl get pods
