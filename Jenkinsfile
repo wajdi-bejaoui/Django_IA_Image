@@ -63,7 +63,6 @@ pipeline {
                 script {
                     sh '''
                      
-                    sh 'kubectl config view'
 
                     
                     echo "Applying Kubernetes manifests"
