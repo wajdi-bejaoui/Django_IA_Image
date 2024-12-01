@@ -75,13 +75,13 @@ pipeline {
                     kubectl apply -f k8s/mysql_deploy.yml
                     kubectl apply -f k8s/django_deploy.yml
 
-                    kubectl logs django-app-5fbcbf58c-f5bvc
 
                     echo "Checking deployed resources"
                     kubectl get pods
                     kubectl get svc
                     minikube service django-service --url 
 
+                    kubectl logs django-app-5fbcbf58c-f5bvc
                     '''
                 }
             }
