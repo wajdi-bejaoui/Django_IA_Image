@@ -27,7 +27,7 @@ resource "kubernetes_manifest" "django_deployment" {
           containers = [
             {
               name  = "django-app"
-              image = "wajdibejaoui/django-app"
+              image = "wajdibejaoui/django-app:40"
               ports = [
                 {
                   containerPort = 8000
