@@ -53,7 +53,7 @@ services:
       - "8000:8000"
     environment:
       DJANGO_SETTINGS_MODULE: auth.settings  # Replace 'auth.settings' with your settings module
-      DATABASE_HOST: db
+      DATABASE_HOST: mysql # cahnged from db
       DATABASE_PORT: 3306
       MYSQL_DATABASE: django_db
       MYSQL_USER: test
