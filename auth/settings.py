@@ -105,7 +105,7 @@ DATABASES = {
         'NAME': os.getenv('MYSQL_DATABASE'),
         'USER': os.getenv('MYSQL_USER'),
         'PASSWORD': os.getenv('MYSQL_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST', 'mysql'), # cahnged from db
+        'HOST': os.getenv('DATABASE_HOST', 'mysql-db'),
         'PORT': os.getenv('DATABASE_PORT', 3306),
     }
 }

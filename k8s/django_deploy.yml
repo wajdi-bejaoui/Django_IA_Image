@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
       - name: django-app
-        # image: wajdibejaoui/django_jenkins:latest
-        image : DOCKER_IMAGE:DOCKER_TAG # Placeholder for dynamic replacement
+        image: wajdibejaoui/django-app:latest
+        # image : DOCKER_IMAGE:DOCKER_TAG # Placeholder for dynamic replacement
         ports:
         - containerPort: 8000
         env:
